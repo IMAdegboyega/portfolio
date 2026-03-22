@@ -9,12 +9,12 @@ const CONFIG = {
   surname: "Iretomiwa",
   title: "Full-Stack Engineer",
   subtitle: "& Cybersecurity Specialist",
-  email: "marveloustommyima@gmail.com",
+  email: "marveloustommyims@gmail.com",
   phone: "+234 906 632 5685",
   location: "Lagos, Nigeria",
   github: "https://github.com/IMAdegboyega",
   linkedin: "https://linkedin.com/in/marvelousiretomiwa",
-  photoUrl: null, // Replace with your hosted photo URL
+  photoUrl: "", // Replace with your hosted photo URL
 };
 
 /* ═══════════════════════════════════════════════════════════
@@ -519,31 +519,43 @@ const projects = [
     name: "Capture", tagline: "Screen Recording & Video Sharing Platform",
     description: "Full-stack video platform with Google OAuth, Bunny.net CDN streaming, Cloudinary media processing, and paginated video feeds with async FastAPI backend.",
     tech: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Bunny.net"], accent: "#8aa4c8",
-    github: "https://github.com/IMAdegboyega", live: null,
+    github: "https://github.com/IMAdegboyega/Capture", live: "https://capture-8zsi.vercel.app/",
   },
   {
-    name: "ArcVault", tagline: "Banking Platform with Plaid Integration",
+    name: "ArcVault", tagline: "Full-Stack Banking Platform",
     description: "Provider-agnostic banking API with Plaid bank linking, JWT token rotation, and a simulated payment layer designed for seamless production swap.",
-    tech: ["Node.js", "Express", "Prisma", "Plaid", "PostgreSQL"], accent: "#c9a84c",
-    github: "https://github.com/IMAdegboyega/IMA-Vault-App", live: null,
+    tech: ["Next.js", "TypeScript", "Node.js", "Express", "Prisma", "PostgreSQL"], accent: "#c9a84c",
+    github: "https://github.com/IMAdegboyega/ArcVault", live: "https://arc-vault-chi.vercel.app/",
   },
   {
     name: "Kiekky", tagline: "Community & Social Platform",
     description: "Production-ready platform with auth, user profiles, feeds, and real-time content. Go backend with clean layered architecture paired with a modern Next.js frontend.",
     tech: ["Next.js", "Go", "PostgreSQL", "JWT", "WebSockets"], accent: "#7dba89",
-    github: "https://github.com/IMAdegboyega", live: null,
+    github: "https://github.com/IMAdegboyega/community-platform-core", live: "https://community-platform-core.vercel.app/",
   },
   {
-    name: "TREMAD Dashboard", tagline: "School Management System",
-    description: "Comprehensive admin dashboard for student records, payments, and exams. Fully responsive with systematic breakpoint coverage across all viewports.",
-    tech: ["React", "Next.js", "Node.js", "PostgreSQL"], accent: "#a78bca",
-    github: null, live: null,
+    name: "247spyware", tagline: "Tech News & Content Platform",
+    description: "Full-featured tech news platform with hero slider, admin dashboard, post scheduling, category management, and responsive editorial layout under Torth Enterprise.",
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Lucide React"], accent: "#d4a86a",
+    github: "https://github.com/IMAdegboyega/247spy", live: "https://247spyware.example.com",
   },
+  {
+    name: "Vault", tagline: "Personal File Storage & Management",
+    description: "Secure cloud storage app with file uploads, sharing, OTP auth, drag-and-drop, and a radial usage chart. Built on Appwrite with shadcn/ui components.",
+    tech: ["Next.js", "TypeScript", "Appwrite", "shadcn/ui", "Tailwind CSS"], accent: "#a78bca",
+    github: "https://github.com/IMAdegboyega/IMA-Vault-App", live: "https://ima-vault-app.vercel.app/",
+  },
+  // {
+  //   name: "TREMAD Dashboard", tagline: "School Management System",
+  //   description: "Comprehensive admin dashboard for student records, payments, and exams. Fully responsive with systematic breakpoint coverage across all viewports.",
+  //   tech: ["React", "Next.js", "Node.js", "PostgreSQL"], accent: "#a78bca",
+  //   github: null, live: "https://tremad-dashboard.example.com",
+  // },
   {
     name: "Travel Agency", tagline: "Full-Stack Booking Platform",
     description: "Travel booking application with JWT-authenticated API layer, structured error handling, and CORS-configured React-to-FastAPI integration.",
     tech: ["React", "FastAPI", "Python", "PostgreSQL"], accent: "#c87a7a",
-    github: null, live: null,
+    github: "https://github.com/IMAdegboyega/IMA-Travelers", live: "https://ima-travelers.vercel.app/",
   },
 ];
 
