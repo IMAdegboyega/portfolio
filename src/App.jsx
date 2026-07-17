@@ -497,7 +497,7 @@ const About = () => (
         <div style={{ display: "flex", gap: 40, marginTop: 44, flexWrap: "wrap" }}>
           {[
             { num: "3+", label: "Years Experience" },
-            { num: "6+", label: "Projects Shipped" },
+            { num: "9+", label: "Projects Shipped" },
             { num: "8+", label: "Core Technologies" },
           ].map((s) => (
             <div key={s.label}>
@@ -510,6 +510,75 @@ const About = () => (
     </div>
   </Section>
 );
+
+/* ═══════════════════════════════════════════════════════════
+   FLAGSHIP PROJECTS — Systems & Security (deep work)
+   ───────────────────────────────────────────────────────────
+   TODO: replace the github/live URLs below with the real ones.
+   Live demos are optional — leave live:"" to hide the Live button.
+   ═══════════════════════════════════════════════════════════ */
+const flagshipProjects = [
+  {
+    name: "ZeroSum",
+    tagline: "Double-Entry Ledger Payment System",
+    problem:
+      "A payments core where the books always sum to zero — proving the parts most “I can do payments” projects skip: double-entry accounting, idempotency, replay-safe webhooks, and drift-free concurrency.",
+    metrics: [
+      { value: "4", label: "Invariants enforced" },
+      { value: "SERIALIZABLE", label: "Isolation level" },
+      { value: "0", label: "Balance drift" },
+    ],
+    highlights: [
+      "Money stored as integer minor units — value is never created or destroyed, only moved; the whole system always sums to zero.",
+      "Append-only postings enforced by a DB trigger; corrections are reversing entries, never edits.",
+      "HMAC-verified inbound webhooks with a replay guard; signed, retried outbound deliveries.",
+    ],
+    tech: ["Go (Gin)", "PostgreSQL", "Next.js", "Docker"],
+    accent: "#c9a84c",
+    github: "https://github.com/IMAdegboyega/zerosum",
+    live: "",
+  },
+  {
+    name: "Real-Time Fraud Detection",
+    tagline: "Explainable Risk Scoring + Immutable Audit",
+    problem:
+      "A latency-critical fraud scorer for a payments ledger. Every transaction is scored in well under 50ms and answered with allow / review / block + a score + human-readable reasons — and every decision is written to an append-only audit log that can be reconstructed and defended months later.",
+    metrics: [
+      { value: "p99 < 50ms", label: "Decision path" },
+      { value: "3-way", label: "allow / review / block" },
+      { value: "Immutable", label: "Audit log" },
+    ],
+    highlights: [
+      "Velocity engine (card / user / IP across 1m / 5m / 1h windows) + rule engine + ML risk model, one shared feature builder for train and serve.",
+      "Plugs into ZeroSum: scores a transfer inline before the ledger commits, with a 40ms timeout and fail-open so a scorer outage never halts payments.",
+      "Every decline is explainable for compliance — “the algorithm decided” is not acceptable, so reasons are durable and tamper-proof.",
+    ],
+    tech: ["FastAPI", "Redis", "Random Forest", "Next.js"],
+    accent: "#c87a7a",
+    github: "https://github.com/IMAdegboyega/fraud-detection",
+    live: "",
+  },
+  {
+    name: "apiscan",
+    tagline: "OWASP API Top 10 Security Scanner",
+    problem:
+      "Point it at an API you own via its OpenAPI spec, and it scans, confirms, and writes up each flaw — broken authorization, broken authentication, mass assignment, and resource abuse — with the exact request/response that proves it.",
+    metrics: [
+      { value: "41", label: "Tests passing" },
+      { value: "5", label: "Detectors" },
+      { value: "Consent-gated", label: "Deny-by-default" },
+    ],
+    highlights: [
+      "Five detectors mapped to the OWASP API Top 10 — BOLA/IDOR, JWT attacks, mass assignment, broken function authz, and rate-limit gaps.",
+      "Every finding is proven with a reproducible HTTP request/response pair, plus confidence and a 0–100 risk score — triaged, not just dumped.",
+      "Deny-by-default allowlist re-checked on every redirect; Authorization / Cookie / API-key headers redacted from stored evidence.",
+    ],
+    tech: ["Python", "FastAPI", "React", "Docker"],
+    accent: "#8aa4c8",
+    github: "https://github.com/IMAdegboyega/apiscan",
+    live: "",
+  },
+];
 
 /* ═══════════════════════════════════════════════════════════
    PROJECTS
@@ -620,8 +689,102 @@ const ProjectCard = ({ project, index }) => {
   );
 };
 
+const FlagshipCard = ({ project, index }) => {
+  const [hovered, setHovered] = useState(false);
+  const [ref, vis] = useReveal(0.1);
+
+  return (
+    <div ref={ref} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+      style={{
+        position: "relative", borderRadius: 16, overflow: "hidden",
+        background: hovered ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.02)",
+        border: `1px solid ${hovered ? `${project.accent}40` : "rgba(255,255,255,0.05)"}`,
+        padding: "40px 40px 36px", transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+        transform: vis ? (hovered ? "translateY(-4px)" : "none") : "translateY(40px)",
+        opacity: vis ? 1 : 0, transitionDelay: `${index * 0.1}s`, cursor: "default",
+      }}
+    >
+      <div style={{
+        position: "absolute", top: 0, left: 0, right: 0, height: 2,
+        background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)`,
+        opacity: hovered ? 0.6 : 0.25, transition: "opacity 0.5s",
+      }} />
+
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 16, flexWrap: "wrap" }}>
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <span style={{ fontSize: 10, letterSpacing: 2.5, color: project.accent, textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif", fontWeight: 600, padding: "4px 10px", borderRadius: 100, background: `${project.accent}12`, border: `1px solid ${project.accent}22` }}>Flagship</span>
+          </div>
+          <h3 style={{ margin: "14px 0 0", fontSize: 27, fontWeight: 400, color: "#f0ece4", fontFamily: "'Playfair Display', serif", letterSpacing: -0.4 }}>{project.name}</h3>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: project.accent, marginTop: 6, fontWeight: 400, opacity: 0.85 }}>{project.tagline}</div>
+        </div>
+        <div style={{ display: "flex", gap: 8, flexShrink: 0 }}>
+          {project.github && (
+            <a href={project.github} target="_blank" rel="noopener noreferrer" style={{
+              color: "rgba(255,255,255,0.3)", textDecoration: "none", fontSize: 12, fontFamily: "'DM Sans', sans-serif",
+              padding: "7px 15px", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 100, transition: "all 0.3s",
+            }}
+              onMouseEnter={(e) => { e.target.style.color = project.accent; e.target.style.borderColor = `${project.accent}55`; }}
+              onMouseLeave={(e) => { e.target.style.color = "rgba(255,255,255,0.3)"; e.target.style.borderColor = "rgba(255,255,255,0.08)"; }}
+            >GitHub ↗</a>
+          )}
+          {project.live && (
+            <a href={project.live} target="_blank" rel="noopener noreferrer" style={{
+              color: "#0a0a0e", textDecoration: "none", fontSize: 12, fontFamily: "'DM Sans', sans-serif",
+              padding: "7px 15px", background: project.accent, borderRadius: 100, fontWeight: 500,
+            }}>Live ↗</a>
+          )}
+        </div>
+      </div>
+
+      <p style={{ color: "rgba(255,255,255,0.5)", fontSize: 15, lineHeight: 1.8, fontFamily: "'DM Sans', sans-serif", fontWeight: 300, margin: "22px 0 28px", maxWidth: 720 }}>
+        {project.problem}
+      </p>
+
+      <div style={{ display: "flex", gap: 32, flexWrap: "wrap", marginBottom: 30, paddingBottom: 28, borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+        {project.metrics.map((m) => (
+          <div key={m.label}>
+            <div style={{ fontSize: 24, fontWeight: 400, color: project.accent, fontFamily: "'Playfair Display', serif", lineHeight: 1.1 }}>{m.value}</div>
+            <div style={{ fontSize: 10.5, color: "rgba(255,255,255,0.35)", letterSpacing: 1.5, textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif", marginTop: 7, fontWeight: 400 }}>{m.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 28 }}>
+        {project.highlights.map((h, j) => (
+          <div key={j} style={{ display: "flex", gap: 12 }}>
+            <span style={{ color: project.accent, fontSize: 7, marginTop: 8, flexShrink: 0 }}>●</span>
+            <span style={{ color: "rgba(255,255,255,0.45)", fontSize: 14, lineHeight: 1.7, fontFamily: "'DM Sans', sans-serif", fontWeight: 300 }}>{h}</span>
+          </div>
+        ))}
+      </div>
+
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+        {project.tech.map((t) => (
+          <span key={t} style={{
+            padding: "5px 14px", background: `${project.accent}0D`, border: `1px solid ${project.accent}1A`,
+            borderRadius: 100, fontSize: 11.5, fontFamily: "'DM Sans', sans-serif", color: `${project.accent}CC`, letterSpacing: 0.5,
+          }}>{t}</span>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const Projects = () => (
   <Section id="projects" label="Selected Work" title="Projects I've Built">
+    <div style={{ marginBottom: 20, display: "flex", alignItems: "baseline", gap: 14, flexWrap: "wrap" }}>
+      <h3 style={{ margin: 0, fontSize: 15, letterSpacing: 3, color: "#c9a84c", textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif", fontWeight: 600 }}>Systems &amp; Security</h3>
+      <span style={{ fontSize: 13.5, color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontWeight: 300 }}>Deep infrastructure work — payments, fraud, and security tooling.</span>
+    </div>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 24, marginBottom: 72 }}>
+      {flagshipProjects.map((p, i) => <FlagshipCard key={p.name} project={p} index={i} />)}
+    </div>
+
+    <div style={{ marginBottom: 20, display: "flex", alignItems: "baseline", gap: 14, flexWrap: "wrap" }}>
+      <h3 style={{ margin: 0, fontSize: 15, letterSpacing: 3, color: "#c9a84c", textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif", fontWeight: 600 }}>Other Builds</h3>
+      <span style={{ fontSize: 13.5, color: "rgba(255,255,255,0.35)", fontFamily: "'DM Sans', sans-serif", fontWeight: 300 }}>Full-stack products across web, media, and fintech.</span>
+    </div>
     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 24 }}>
       {projects.map((p, i) => <ProjectCard key={p.name} project={p} index={i} />)}
     </div>
@@ -759,7 +922,7 @@ const Security = () => (
       background: "rgba(200, 122, 122, 0.03)", border: "1px solid rgba(200,122,122,0.08)",
     }}>
       <p style={{ margin: 0, color: "rgba(255,255,255,0.5)", fontSize: 15, lineHeight: 1.8, fontFamily: "'DM Sans', sans-serif", fontWeight: 300 }}>
-        Beyond building applications, I bring a <span style={{ color: "#c87a7a", fontWeight: 500 }}>security-first engineering mindset</span>. My training covers SOC analyst operations, hands-on malware traffic analysis, OWASP Top 10, and practical vulnerability testing — making me a strong fit for teams that treat security as a core feature.
+        Beyond building applications, I bring a <span style={{ color: "#c87a7a", fontWeight: 500 }}>security-first engineering mindset</span> — and I've shipped it, not just studied it. <span style={{ color: "rgba(255,255,255,0.8)" }}>apiscan</span> automates the OWASP API Top 10 with reproducible evidence, and my <span style={{ color: "rgba(255,255,255,0.8)" }}>real-time fraud detection</span> system defends a live payments ledger with explainable, auditable decisions. That work sits on top of SOC analyst operations, hands-on malware traffic analysis, and practical vulnerability testing — making me a strong fit for teams that treat security as a core feature.
       </p>
     </div>
 
