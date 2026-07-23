@@ -536,6 +536,7 @@ const flagshipProjects = [
     tech: ["Go (Gin)", "PostgreSQL", "Next.js", "Docker"],
     accent: "#c9a84c",
     github: "https://github.com/IMAdegboyega/zerosum",
+    demo: "https://www.loom.com/share/091d851a00b94950969df6ade041cef1", 
     live: "",
   },
   {
@@ -556,6 +557,7 @@ const flagshipProjects = [
     tech: ["FastAPI", "Redis", "Random Forest", "Next.js"],
     accent: "#c87a7a",
     github: "https://github.com/IMAdegboyega/fraud-detection",
+    demo: "", // Loom/video walkthrough URL
     live: "",
   },
   {
@@ -576,6 +578,7 @@ const flagshipProjects = [
     tech: ["Python", "FastAPI", "React", "Docker"],
     accent: "#8aa4c8",
     github: "https://github.com/IMAdegboyega/apiscan",
+    demo: "", // Loom/video walkthrough URL
     live: "",
   },
 ];
@@ -588,31 +591,31 @@ const projects = [
     name: "Capture", tagline: "Screen Recording & Video Sharing Platform",
     description: "Full-stack video platform with Google OAuth, Bunny.net CDN streaming, Cloudinary media processing, and paginated video feeds with async FastAPI backend.",
     tech: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Bunny.net"], accent: "#8aa4c8",
-    github: "https://github.com/IMAdegboyega/Capture", live: "https://capture-8zsi.vercel.app/",
+    github: "https://github.com/IMAdegboyega/Capture", demo: "", live: "https://capture-8zsi.vercel.app/",
   },
   {
     name: "ArcVault", tagline: "Full-Stack Banking Platform",
     description: "Provider-agnostic banking API with Plaid bank linking, JWT token rotation, and a simulated payment layer designed for seamless production swap.",
     tech: ["Next.js", "TypeScript", "Node.js", "Express", "Prisma", "PostgreSQL"], accent: "#c9a84c",
-    github: "https://github.com/IMAdegboyega/ArcVault", live: "https://arc-vault-chi.vercel.app/",
+    github: "https://github.com/IMAdegboyega/ArcVault", demo: "", live: "https://arc-vault-chi.vercel.app/",
   },
   {
     name: "Kiekky", tagline: "Community & Social Platform",
     description: "Production-ready platform with auth, user profiles, feeds, and real-time content. Go backend with clean layered architecture paired with a modern Next.js frontend.",
     tech: ["Next.js", "Go", "PostgreSQL", "JWT", "WebSockets"], accent: "#7dba89",
-    github: "https://github.com/IMAdegboyega/community-platform-core", live: "https://community-platform-core.vercel.app/",
+    github: "https://github.com/IMAdegboyega/community-platform-core", demo: "", live: "https://community-platform-core.vercel.app/",
   },
   {
     name: "247spyware", tagline: "Tech News & Content Platform",
     description: "Full-featured tech news platform with hero slider, admin dashboard, post scheduling, category management, and responsive editorial layout under Torth Enterprise.",
     tech: ["Next.js", "TypeScript", "Tailwind CSS", "Lucide React"], accent: "#d4a86a",
-    github: "https://github.com/IMAdegboyega/247spy", live: "https://247spyware.example.com",
+    github: "https://github.com/IMAdegboyega/247spy", demo: "", live: "",
   },
   {
     name: "Vault", tagline: "Personal File Storage & Management",
     description: "Secure cloud storage app with file uploads, sharing, OTP auth, drag-and-drop, and a radial usage chart. Built on Appwrite with shadcn/ui components.",
     tech: ["Next.js", "TypeScript", "Appwrite", "shadcn/ui", "Tailwind CSS"], accent: "#a78bca",
-    github: "https://github.com/IMAdegboyega/IMA-Vault-App", live: "https://ima-vault-app.vercel.app/",
+    github: "https://github.com/IMAdegboyega/IMA-Vault-App", demo: "", live: "https://ima-vault-app.vercel.app/",
   },
   // {
   //   name: "TREMAD Dashboard", tagline: "School Management System",
@@ -624,7 +627,7 @@ const projects = [
     name: "Travel Agency", tagline: "Full-Stack Booking Platform",
     description: "Travel booking application with JWT-authenticated API layer, structured error handling, and CORS-configured React-to-FastAPI integration.",
     tech: ["React", "FastAPI", "Python", "PostgreSQL"], accent: "#c87a7a",
-    github: "https://github.com/IMAdegboyega/IMA-Travelers", live: "https://ima-travelers.vercel.app/",
+    github: "https://github.com/IMAdegboyega/IMA-Travelers", demo: "", live: "https://ima-travelers.vercel.app/",
   },
 ];
 
@@ -663,6 +666,16 @@ const ProjectCard = ({ project, index }) => {
               onMouseEnter={(e) => { e.target.style.color = "#c9a84c"; e.target.style.borderColor = "rgba(201,168,76,0.3)"; }}
               onMouseLeave={(e) => { e.target.style.color = "rgba(255,255,255,0.3)"; e.target.style.borderColor = "rgba(255,255,255,0.08)"; }}
             >GitHub ↗</a>
+          )}
+          {project.demo && (
+            <a href={project.demo} target="_blank" rel="noopener noreferrer" style={{
+              color: project.accent, textDecoration: "none", fontSize: 12, fontFamily: "'DM Sans', sans-serif",
+              padding: "6px 14px", border: `1px solid ${project.accent}55`, background: `${project.accent}12`,
+              borderRadius: 100, transition: "all 0.3s",
+            }}
+              onMouseEnter={(e) => { e.target.style.background = `${project.accent}22`; }}
+              onMouseLeave={(e) => { e.target.style.background = `${project.accent}12`; }}
+            >▶ Demo</a>
           )}
           {project.live && (
             <a href={project.live} target="_blank" rel="noopener noreferrer" style={{
@@ -727,6 +740,16 @@ const FlagshipCard = ({ project, index }) => {
               onMouseEnter={(e) => { e.target.style.color = project.accent; e.target.style.borderColor = `${project.accent}55`; }}
               onMouseLeave={(e) => { e.target.style.color = "rgba(255,255,255,0.3)"; e.target.style.borderColor = "rgba(255,255,255,0.08)"; }}
             >GitHub ↗</a>
+          )}
+          {project.demo && (
+            <a href={project.demo} target="_blank" rel="noopener noreferrer" style={{
+              color: project.accent, textDecoration: "none", fontSize: 12, fontFamily: "'DM Sans', sans-serif",
+              padding: "7px 15px", border: `1px solid ${project.accent}55`, background: `${project.accent}12`,
+              borderRadius: 100, fontWeight: 500, transition: "all 0.3s",
+            }}
+              onMouseEnter={(e) => { e.target.style.background = `${project.accent}22`; }}
+              onMouseLeave={(e) => { e.target.style.background = `${project.accent}12`; }}
+            >▶ Demo</a>
           )}
           {project.live && (
             <a href={project.live} target="_blank" rel="noopener noreferrer" style={{
