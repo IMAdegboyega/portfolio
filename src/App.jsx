@@ -578,7 +578,7 @@ const flagshipProjects = [
     tech: ["Python", "FastAPI", "React", "Docker"],
     accent: "#8aa4c8",
     github: "https://github.com/IMAdegboyega/apiscan",
-    demo: "", // Loom/video walkthrough URL
+    demo: "https://www.loom.com/share/64ffed1176b04a158187412a25f2907e", 
     live: "",
   },
 ];
