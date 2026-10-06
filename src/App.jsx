@@ -9,7 +9,7 @@ const CONFIG = {
   surname: "Iretomiwa",
   title: "Full-Stack Engineer",
   subtitle: "& Cybersecurity Specialist",
-  email: "marveloustommyims@gmail.com",
+  email: "marveloustommyima@gmail.com",
   phone: "+234 906 632 5685",
   location: "Lagos, Nigeria",
   github: "https://github.com/IMAdegboyega",
