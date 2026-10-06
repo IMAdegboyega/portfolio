@@ -14,7 +14,7 @@ const CONFIG = {
   location: "Lagos, Nigeria",
   github: "https://github.com/IMAdegboyega",
   linkedin: "https://linkedin.com/in/marvelousiretomiwa",
-  photoUrl: "", // Replace with your hosted photo URL
+  photoUrl: "/tomiwa1.jpeg",
 };
 
 /* ═══════════════════════════════════════════════════════════
@@ -462,7 +462,7 @@ const Hero = () => {
 const About = () => (
   <Section id="about" label="Introduction" title="Building Digital Experiences With Purpose">
     <div style={{ display: "grid", gridTemplateColumns: "300px 1fr", gap: 60, alignItems: "start" }} className="about-grid">
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative", width: 280 }}>
         <div style={{
           width: 280, height: 360, borderRadius: 12, overflow: "hidden", position: "relative",
           background: "linear-gradient(145deg, rgba(201,168,76,0.08), rgba(30,30,40,0.5))",
@@ -479,8 +479,8 @@ const About = () => (
             </div>
           )}
         </div>
-        <div style={{ position: "absolute", top: -8, right: -8, width: 60, height: 60, borderTop: "1px solid rgba(201,168,76,0.2)", borderRight: "1px solid rgba(201,168,76,0.2)", borderRadius: "0 8px 0 0" }} />
-        <div style={{ position: "absolute", bottom: -8, left: -8, width: 60, height: 60, borderBottom: "1px solid rgba(201,168,76,0.2)", borderLeft: "1px solid rgba(201,168,76,0.2)", borderRadius: "0 0 0 8px" }} />
+        <div style={{ position: "absolute", top: -8, right: -8, width: 60, height: 60, borderTop: "1px solid rgba(201,168,76,0.2)", borderRight: "1px solid rgba(201,168,76,0.2)", borderRadius: "0 20px 0 0" }} />
+        <div style={{ position: "absolute", bottom: -8, left: -8, width: 60, height: 60, borderBottom: "1px solid rgba(201,168,76,0.2)", borderLeft: "1px solid rgba(201,168,76,0.2)", borderRadius: "0 0 0 20px" }} />
       </div>
 
       <div>
